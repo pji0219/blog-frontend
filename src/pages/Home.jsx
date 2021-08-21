@@ -1,9 +1,10 @@
 import React from 'react';
+import PostListContainer from '../container/PostListContainer';
 
 function Home() {
   return (
     <div>
-      <h1>Home</h1>
+      <PostListContainer />
     </div>
   );
 }

@@ -1,0 +1,8 @@
+.post {
+  flex-grow: 1;
+  list-style: none;
+  background-color: skyblue;
+  width: 370px;
+  height: 540px;
+  margin-left: 4px;
+}
