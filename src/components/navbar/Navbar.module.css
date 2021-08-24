@@ -5,31 +5,35 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0px 2px 5px;
 }
 
 .blog_name {
+  color: #fff;
   font-size: 32px;
 }
 
 .login_btn {
+  color: #fff;
   margin-right: 50px;
   font-size: 32px;
 }
 
 .open_menu_bar_btn {
+  color: #fff;
   margin-left: 50px;
   text-decoration: none;
   font-size: 32px;
 }
 
 .open_menu_bar_btn:visited {
-  color: black;
+  color: #fff;
   text-decoration: none;
 }
 
 .nav_menu {
   background-color: #fff;
-  /* background-color: skyblue; */
+  box-shadow: 5px 0px 20px;
   width: 340px;
   height: 100vh;
   position: fixed;
@@ -75,6 +79,7 @@
 }
 
 .nav_text a {
+  color: #757575;
   text-decoration: none;
   font-size: 18px;
   width: 88.3%;

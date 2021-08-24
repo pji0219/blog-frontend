@@ -15,7 +15,7 @@ function PostListContainer() {
 
   if (loading) return <Loading />;
   if (error) return <div>에러 발생!</div>;
-  if (!data) return null;
+  if (!data) return <div>아직 포스트가 없습니다.</div>;
   return <PostList posts={data} />;
 }
 
