@@ -11,7 +11,11 @@ function Pagination({ postsPerPage, totalPosts, paginate }) {
 
   return (
     <ul className={styles.Pagination}>
-      
+      {pageNumbers.map(number => (
+        <li>
+          
+        </li>
+      ))}
     </ul>
   );
 }
