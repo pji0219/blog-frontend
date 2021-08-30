@@ -34,7 +34,7 @@ export function* postsSaga() {
 const initialState = {
   posts: {
     loading: false,
-    data: null,
+    data: [],
     error: null
   },
   post: {

@@ -1,7 +1,7 @@
 import js from './js.png';
 
 // n초 뒤에 실행 되게하는 promise
-const sleep = n => new Promise(resolve => setTimeout(resolve, n));
+// const sleep = n => new Promise(resolve => setTimeout(resolve, n));
 
 // 'wrwrwerwerwerwerewrwrwrwrwrwrwrwrwrwrwrwrwrwrwrwrrertyyyyyyyyttttttttttwerwerwerwerwerwerwerwerwerwerwerwer'
 const posts = [
@@ -125,9 +125,129 @@ const posts = [
     comments: 7,
     views: 100,
   },
+  {
+    id: 13,
+    img: js,
+    title: '포스트13',
+    desc: '포스트13 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 14,
+    img: js,
+    title: '포스트14',
+    desc: '포스트14 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 15,
+    img: js,
+    title: '포스트15',
+    desc: '포스트15 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 16,
+    img: js,
+    title: '포스트16',
+    desc: '포스트16 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 17,
+    img: js,
+    title: '포스트17',
+    desc: '포스트17 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 18,
+    img: js,
+    title: '포스트18',
+    desc: '포스트18 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 19,
+    img: js,
+    title: '포스트19',
+    desc: '포스트19 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 20,
+    img: js,
+    title: '포스트20',
+    desc: '포스트20 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 21,
+    img: js,
+    title: '포스트21',
+    desc: '포스트21 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 22,
+    img: js,
+    title: '포스트22',
+    desc: '포스트22 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 23,
+    img: js,
+    title: '포스트23',
+    desc: '포스트23 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
+  {
+    id: 24,
+    img: js,
+    title: '포스트24',
+    desc: '포스트24 입니다.',
+    date: '최근',
+    user: 'administrator',
+    comments: 7,
+    views: 100,
+  },
 ]
 
-export const PostsAPI = async () => {
-  await sleep(1000);
+export const PostsAPI = () => {
+  // await sleep(1000);
   return posts;
 }

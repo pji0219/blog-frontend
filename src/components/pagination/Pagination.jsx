@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import styles from './Pagination.module.css';
 
-function Pagination({ postsPerPage, totalPosts, paginate }) {
+function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
   const pageNumbers = [];
 
   // 총 포스트 수를 페이지 당 포스트 수로 나누어서 구해진 값이 페이지 수
@@ -10,10 +12,12 @@ function Pagination({ postsPerPage, totalPosts, paginate }) {
   }
 
   return (
-    <ul className={styles.Pagination}>
+    <ul className={styles.pagination}>
       {pageNumbers.map(number => (
-        <li>
-          
+        <li key={number} className={styles.page_item}>
+          <Link className={currentPage === number ? styles.active : null} onClick={() => {paginate(number)}} to="#">
+            {number}
+          </Link>
         </li>
       ))}
     </ul>
