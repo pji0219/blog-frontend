@@ -21,9 +21,9 @@ function PostListContainer() {
   }, [dispatch]);
 
   // pagination, 한 페이지 당 포스트 12개
-  // 12 (첫 페이지 기준)
+  // 마지막 포스트: 12번째 인덱스(첫 페이지 기준)
   const indexOfLastPost = currentPage * postPerPage;
-  // 0 (첫 페이지 기준)
+  // 첫 포스트: 0번째 인덱스(첫 페이지 기준)
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   // 0부터 12전까지 자름 (기존 배열은 건들이지 않고 12번째 포스트까지 자름)
   const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);

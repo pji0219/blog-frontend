@@ -5,19 +5,18 @@
   align-items: center;
 }
 
-.page_item {
+.pagination li {
   list-style: none;
   width: 30px;
   height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.page_item a {
+  cursor: pointer;
   font-size: 18px;
 }
 
-.active {
+.pagination li.active {
   color: #4fc3f7;
+}
+
+.pagination .prev_btn {
+  
 }
