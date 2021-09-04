@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Pagination.css';
+import './Pagination.css';
 import { FaStepBackward, FaStepForward } from "react-icons/fa";
 
 function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
@@ -23,13 +23,29 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
 
   // 이전, 다음 페이지 버튼 기능 구현
   const prevBtn = () => {
-    setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-    setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    if (currentPage === pageNumbers[0]) {
+      return;
+    }
+
+    paginate(currentPage - 1);
+
+    if ((currentPage - 1) % maxPageNumberLimit == 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
   }
 
   const nextBtn = () => {
+    if (currentPage === pageNumbers[pageNumbers.length - 1]) {
+      return;
+    }
+  
+    paginate(currentPage + 1);
+
+   if (currentPage + 1 > maxPageNumberLimit) {
     setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
     setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+   }
   }
 
   // 페이지 숫자 리스트
@@ -62,6 +78,7 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
       <div
         className="next_btn"
         onClick={nextBtn}
+        
       >
         <FaStepForward />
       </div>

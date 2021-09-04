@@ -17,6 +17,12 @@
   color: #4fc3f7;
 }
 
-.pagination .prev_btn {
-  
+.pagination .prev_btn:hover {
+  cursor: pointer;
+  background-color: #c7c7c7;
+}
+
+.pagination .next_btn:hover {
+  cursor: pointer;
+  background-color: #c7c7c7;
 }
