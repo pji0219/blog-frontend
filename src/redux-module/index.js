@@ -1,14 +1,17 @@
 import { combineReducers } from "redux";
-import posts, { postsSaga } from "./post";
 import { all } from 'redux-saga/effects';
+import posts, { postsSaga } from "./post";
+import authReducer, { registerUserSaga } from "./auth";
 
 const rootReducer = combineReducers({
-  posts
+  posts,
+  auth: authReducer
 });
 
 export function* rootSaga() {
   yield all([
-    postsSaga()
+    postsSaga(),
+    registerUserSaga()
   ]);
 }
 
