@@ -11,12 +11,24 @@
 .blog_name {
   color: #fff;
   font-size: 32px;
+  text-decoration: none;
+}
+
+.blog_name:visited {
+  color: #fff;
+  text-decoration: none;
 }
 
 .login_btn {
   color: #fff;
   margin-right: 50px;
   font-size: 32px;
+  text-decoration: none;
+}
+
+.login_btn:visited {
+  color: #fff;
+  text-decoration: none;
 }
 
 .open_menu_bar_btn {

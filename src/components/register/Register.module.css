@@ -5,8 +5,6 @@
 }
 
 .register_container {
-  display: flex;
-  flex-direction: column;
   width: 750px;
   height: 470px;
   border-radius: 5px;
@@ -66,4 +64,19 @@
 
 .btn_container button:hover {
   background-color: #c7c7c7;
+}
+
+.btn_container a {
+  color: #3b5998;
+  font-size: 16.5px;
+  text-decoration: none;
+}
+
+.btn_container a:hover {
+  background-color: #c7c7c7;
+}
+
+.btn_container a:visited {
+  color: #3b5998;
+  text-decoration: none;
 }

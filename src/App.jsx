@@ -7,6 +7,7 @@ import Html from './pages/Html';
 import Css from './pages/Css';
 import Js from './pages/Js';
 import registerPage from './pages/registerPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/css" component={Css}/>
         <Route path="/javascript" component={Js}/>
         <Route path="/register" component={registerPage}/>
+        <Route path="/login" component={LoginPage} />
       </Switch>
     </BrowserRouter>
   );

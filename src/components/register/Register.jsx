@@ -1,9 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Register.module.css';
 
-function Register({ onChange, onSubmit, value }) {
-  const {email, password, repassword, nickname} = value;
+function Register({ submit }) {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    repassword: '',
+    nickname: ''
+  });
+  const {email, password, repassword, nickname} = user;
+  
+  const onChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
 
+    setUser({
+      ...user,
+      [name] : value
+    })
+  }
+
+  const onSubmit = event => {
+    event.preventDefault();
+    submit(user);
+    setUser({
+      email: '',
+      password: '',
+      repassword: '',
+      nickname: ''
+    });
+  }
+  
   return (
     <div className={styles.form_container}>
       <form onSubmit={onSubmit} className={styles.register_container}>
@@ -18,7 +46,7 @@ function Register({ onChange, onSubmit, value }) {
         </div>
         <div className={styles.btn_container}>
           <button type="submit">등록</button>
-          <button>취소</button>
+          <Link to="/login">취소</Link>
         </div>
       </form>
     </div>

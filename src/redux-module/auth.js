@@ -106,7 +106,7 @@ export default function authReducer(state = initialState, action) {
       localStorage.getItem('token', action.payload.token);
       return {
         ...state,
-        nickname: action.payload.name,
+        nickname: action.payload.nickname,
         email: action.payload.email,
         password: action.payload.password,
         repassword: action.payload.repassword,
@@ -120,9 +120,10 @@ export default function authReducer(state = initialState, action) {
         // ...action.payload,
         token: null,
         isAuthenticated: false,
-        name: null,
+        nickname: null,
         email: null,
         password: null,
+        repassword: null,
         errorMsg: action.payload.data.msg
       }
     default:

@@ -17,10 +17,10 @@ function Navbar() {
         <Link to="#" className={styles.open_menu_bar_btn}>
           <FaBars onClick={showSidebar} />
         </Link>
-        <span className={styles.blog_name}>Blog</span>
-        <span className={styles.login_btn}>
+        <Link to="/" className={styles.blog_name}>Blog</Link>
+        <Link to="/login" className={styles.login_btn}>
           <FaSignInAlt />
-        </span>
+        </Link>
       </header>
       <nav className={sidebar ? classNames({[styles.nav_menu]: true, [styles.active]: true}) : styles.nav_menu}>
         <ul className={styles.nav_menu_items}>
