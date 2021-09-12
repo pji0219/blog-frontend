@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Login.module.css';
 
-function Login({ onChange, onSubmit, value }) {
-  const {email, password} = value;
+function Login({ submit }) {
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
+  const {email, password} = user;
+
+  const onChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setUser({
+      ...user,
+      [name] : value
+    });
+  }
+
+  const onSubmit = event => {
+    event.preventDefault();
+    submit(user);
+    setUser({
+      email: '',
+      password: ''
+    });
+  }
+
 
   return (
     <div className={styles.form_container}>

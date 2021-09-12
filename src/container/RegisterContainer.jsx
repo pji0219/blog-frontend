@@ -4,7 +4,6 @@ import Register from '../components/register/Register';
 import { register } from '../redux-module/auth';
 
 function RegisterContainer() {
-
   const dispatch = useDispatch();
 
   const submit = user => dispatch(register(user));
