@@ -86,7 +86,7 @@ export function* loginUserSaga() {
 // 리듀서
 const initialState = {
   token: localStorage.getItem('token'),
-  isAuthenticated: false,
+  isAuthenticated: true,
   nickname: null,
   email: null,
   password: null,

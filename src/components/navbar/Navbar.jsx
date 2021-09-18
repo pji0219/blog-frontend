@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import styles from './Navbar.module.css';
 import classNames from 'classnames';
-import { FaSignInAlt, FaBars } from "react-icons/fa";
 import { AiOutlineClose } from 'react-icons/ai';
+import { FaBars } from "react-icons/fa"
 
-function Navbar() {
+function Navbar({ auth }) {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -18,9 +18,29 @@ function Navbar() {
           <FaBars onClick={showSidebar} />
         </Link>
         <Link to="/" className={styles.blog_name}>Blog</Link>
-        <Link to="/login" className={styles.login_btn}>
-          <FaSignInAlt />
-        </Link>
+        {auth ? 
+          (
+            <Link to="/write">
+              <button className={styles.create_post_btn}>
+                글쓰기
+              </button>
+            </Link>
+          ) : null
+        }
+        {auth ? 
+          (
+            <button className={styles.logout_btn}>
+              로그아웃
+            </button>
+          ) 
+          : (
+            <Link to="/login" >
+              <button className={styles.login_btn}>
+                로그인 / 등록
+              </button>
+            </Link>
+          )
+        }
       </header>
       <nav className={sidebar ? classNames({[styles.nav_menu]: true, [styles.active]: true}) : styles.nav_menu}>
         <ul className={styles.nav_menu_items}>

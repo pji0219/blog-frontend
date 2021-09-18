@@ -1,14 +1,15 @@
 .header {
   background-color: #d81b60;
   height: 53px;
-  padding: 16px 0;
+  padding: 16px 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   box-shadow: 0px 2px 5px;
 }
 
 .blog_name {
+  position: relative;
+  left: 45%;
   color: #fff;
   font-size: 32px;
   text-decoration: none;
@@ -19,21 +20,66 @@
   text-decoration: none;
 }
 
-.login_btn {
-  color: #fff;
-  margin-right: 50px;
-  font-size: 32px;
-  text-decoration: none;
+.create_post_btn {
+  position: relative;
+  left: 1534px;
+  height: 48px;
+  padding: 0 16px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #f57c00;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
-.login_btn:visited {
+.create_post_btn:hover {
+  background-color: #ffc947;
   color: #fff;
-  text-decoration: none;
+}
+
+.login_btn {
+  position: relative;
+  left: 1550px;
+  height: 48px;
+  padding: 0 16px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.login_btn:hover {
+  color: #fff;
+  background-color: #3b5998;
+}
+
+.logout_btn {
+  position: relative;
+  left: 1550px;
+  height: 48px;
+  padding: 0 16px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #fff;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logout_btn:hover {
+  color: #fff;
+  background-color: #3b5998;
 }
 
 .open_menu_bar_btn {
   color: #fff;
-  margin-left: 50px;
+  /* margin-left: 50px; */
   text-decoration: none;
   font-size: 32px;
 }
@@ -41,6 +87,10 @@
 .open_menu_bar_btn:visited {
   color: #fff;
   text-decoration: none;
+}
+
+.open_menu_bar_btn:hover {
+  color: #c7c7c7;
 }
 
 .nav_menu {
