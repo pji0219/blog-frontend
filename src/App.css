@@ -1,38 +1,21 @@
-.App {
-  text-align: center;
+/* Ck에디터5 */
+.ck.ck-editor {
+  min-width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.ck-editor__editable {
+  max-height: 80rem;
+  min-height: 20rem;
+  min-width: 100rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.ck-editor__editable_inline {
+  max-height: 80rem;
+  min-height: 30rem;
+  min-width: 100%
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+html {
+  width: 100vw;
+  overflow-x: hidden;
 }

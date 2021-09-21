@@ -2,9 +2,12 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 // 타입
+// 회원가입
 const REGISTER_REQUEST = 'REGISTER_REQUEST';
 const REGISTER_REQUEST_SUCCESS = 'REGISTER_REQUEST_SUCCESS';
 const REGISTER_REQUEST_ERORR = 'REGISTER_REQUEST_ERROR';
+
+// 로그인
 const LOGIN_REQUEST = 'LOGIN_REQUEST';
 const LOGIN_REQUEST_SUCCESS = 'LOGIN_REQUEST_SUCCESS';
 const LOGIN_REQUEST_ERORR = 'LOGIN_REQUEST_ERORR';

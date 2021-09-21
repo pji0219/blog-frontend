@@ -41,6 +41,7 @@ function Login({ submit }) {
         </div>
         <div className={styles.btn_container}>
           <button type="submit">로그인</button>
+          <Link to="/">취소</Link>
           <Link to="/register">계정 만들기</Link>
         </div>
       </form>

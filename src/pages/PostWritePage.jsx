@@ -1,10 +1,10 @@
 import React from 'react';
-import PostWrite from '../components/post-write/PostWrite';
+import PostWriteContainer from '../container/PostWriteContainer';
 
 function PostWritePage() {
   return (
     <>
-      <PostWrite />
+      <PostWriteContainer />
     </>
   );
 }
