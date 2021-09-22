@@ -7,23 +7,113 @@ import Myinit from '../../editor/UploadAdapter';
 import styles from './PostWrite.module.css';
 
 function PostWrite({ submit }) {
-  const {value, setValues} = useState({
-    title: ""
-  })
+  const [form, setForm] = useState({
+    title: '',
+    category: '',
+    contents: '',
+    fileUrl: ''
+  });
+  const {title, category, contents, fileUrl} = form;
+  
+  const onChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setForm({
+      ...form,
+      [name] : value
+    });
+  }
+
+  const getDataFromCKEditor = (event, editor) => {
+    const data = editor.getData();
+    // console.log(data);
+
+    // if (!data) {
+    //   alert('글을 입력 하세요.');
+    // }
+
+    if (data && data.match("<img src=")) {
+      const whereImg_start = data.indexOf("<img src=");
+      console.log(whereImg_start);
+      let whereImg_end = "";
+      let ext_name_find = "";
+      let result_Img_Url = "";
+
+      const ext_name = ["jpeg", "png", "jpg", "gif"];
+
+      for (let i = 0; i < ext_name.length; i++) {
+        if (data.match(ext_name[i])) {
+          console.log(data.indexOf(`${ext_name[i]}`));
+          ext_name_find = ext_name[i];
+          whereImg_end = data.indexOf(`${ext_name[i]}`);
+        }
+      }
+      console.log(ext_name_find);
+      console.log(whereImg_end);
+
+      if (ext_name_find === "jpeg") {
+        result_Img_Url = data.substring(whereImg_start + 10, whereImg_end + 4);
+      } else {
+        result_Img_Url = data.substring(whereImg_start + 10, whereImg_end + 3);
+      }
+
+      console.log(result_Img_Url, "result_Img_Url");
+      setForm({
+        ...form,
+        fileUrl: result_Img_Url,
+        contents: data,
+      });
+
+    } else if (data){
+      setForm({
+        ...form,
+        fileUrl: "",
+        contents: data,
+      });
+
+    }
+  }
+
+  const onSubmit = async event => {
+    await event.preventDefault();
+    const token = localStorage.getItem('token');
+    const body = {
+      title,
+      category,
+      contents,
+      fileUrl,
+      token
+    }
+    submit(body);
+  }
 
   return (
     <>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className={styles.input_container}>
           <label htmlFor="title">제목</label>
-          <input type="text" placeholder="제목을 입력 하세요." />
+          <input 
+            type="text"
+            name="title"
+            value={title || ''}
+            onChange={onChange}
+            placeholder="제목을 입력 하세요." 
+          />
           <label htmlFor="category">카테고리</label>
-          <input type="text" placeholder="카테고리를 입력하세요." />
+          <input 
+            type="text" 
+            name="category"
+            value={category || ''}
+            onChange={onChange} 
+            placeholder="카테고리를 입력하세요." 
+          />
         </div>
         <CKEditor 
           editor={ClassicEditor}
           config={editorConfiguration}
           onReady={Myinit}
+          onBlur={getDataFromCKEditor}
         />
         <div className={styles.btn_container}>
           <button type="submit">
@@ -32,7 +122,6 @@ function PostWrite({ submit }) {
           <button>
             <Link to="/">취소</Link>
           </button>
-          
         </div>
       </form>
     </>
