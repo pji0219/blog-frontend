@@ -5,16 +5,16 @@ import styles from './PostList.module.css';
 function PostList({ posts }) {
   return (
     <ul className={styles.post_list}>
-      {posts.map(post => (
+      {posts.map((post, index) => (
         <Post 
-          key={post.id}
-          img={post.img}
-          title={post.title}
-          desc={post.desc}
-          date={post.date}
-          user={post.user}
+          key={index}
+          img={post.Img}
+          title={post.post_title}
+          contents={post.content}
+          date={post.post_Date}
+          user={post.post_write}
           comments={post.comments}
-          views={post.views}
+          views={post.post_see}
         />
       ))}
     </ul>

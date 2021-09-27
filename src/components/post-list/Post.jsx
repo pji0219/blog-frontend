@@ -1,15 +1,16 @@
 import React from 'react';
+import js from './js.png';
 import styles from './Post.module.css';
 import { Link } from 'react-router-dom';
 
-function post({ title, desc, img, date, user, comments, views }) {
+function post({ title, contents, date, user, comments, views }) {
 
   return (
     <Link to="#">
       <li className={styles.post_container}>
-        <img className={styles.post_img} src={img} alt="img" />
+        <img className={styles.post_img} src={js} alt="img" />
         <h3 className={styles.post_title}>{title}</h3>
-        <p className={styles.post_body}>{desc}</p>
+        <p className={styles.post_body}>{contents}</p>
         <div className={styles.post_date_container}>
           <span>{date}</span>
         </div>

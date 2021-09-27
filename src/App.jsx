@@ -11,7 +11,6 @@ import LoginPage from './pages/LoginPage';
 import NavbarContainer from './container/NavbarContainer';
 import PostWritePage from './pages/PostWritePage';
 
-
 function App() {
   return (
     <BrowserRouter>

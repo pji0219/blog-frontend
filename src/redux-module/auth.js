@@ -89,11 +89,11 @@ export function* loginUserSaga() {
 // 리듀서
 const initialState = {
   token: localStorage.getItem('token'),
-  isAuthenticated: true,
-  nickname: null,
-  email: null,
-  password: null,
-  repassword: null,
+  isAuthenticated: false,
+  user_idx: null,
+  user_id: null,
+  user_pwd: null,
+  user_name: null,
   errorMsg: ''
 }
 
@@ -104,16 +104,24 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state
       }
-    case REGISTER_REQUEST_SUCCESS:
     case LOGIN_REQUEST_SUCCESS:
       localStorage.getItem('token', action.payload.token);
       return {
         ...state,
-        nickname: action.payload.nickname,
-        email: action.payload.email,
-        password: action.payload.password,
-        repassword: action.payload.repassword,
+        user_idx: action.payload.user_idx,
+        user_id: action.payload.user_id,
+        user_pwd: action.payload.user_pwd,
+        user_name: action.payload.user_name,
         isAuthenticated: true
+      }
+    case REGISTER_REQUEST_SUCCESS:
+      localStorage.getItem('token', action.payload.token);
+      return {
+        ...state,
+        user_id: action.payload.user_id,
+        user_pwd: action.payload.user_pwd,
+        user_name: action.payload.user_name,
+        isAuthenticated: false
       }
     case REGISTER_REQUEST_ERORR:
     case LOGIN_REQUEST_ERORR:
@@ -123,11 +131,10 @@ export default function authReducer(state = initialState, action) {
         // ...action.payload,
         token: null,
         isAuthenticated: false,
-        nickname: null,
-        email: null,
-        password: null,
-        repassword: null,
-        errorMsg: action.payload.data.msg
+        user_idx: null,
+        user_id: null,
+        user_pwd: null,
+        user_name: null
       }
     default:
       return state;
