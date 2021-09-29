@@ -34,15 +34,15 @@ const registerUserAPI = (req) => {
     }
   }
   
-  return axios.post('api/user', req, config);
+  return axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signUp`, req, config);
 }
 
 function* registerUser(action) {
   try {
-    const result = yield call(registerUserAPI, action.payload);
+    const res = yield call(registerUserAPI, action.payload);
     yield put({
       type: REGISTER_REQUEST_SUCCESS,
-      payload: result.data
+      payload: res.data
     });
   } catch(err) {
     yield put({
@@ -58,21 +58,27 @@ export function* registerUserSaga() {
 
 // 로그인
 const loginUserAPI = req => {
-  const config = {
-    Headers: {
-      'content-Type': 'application/json'
-    }
-  }
-  
-  return axios.post('api/user', req, config);
+  // const config = {
+  //   Headers: {
+  //     'content-Type': 'application/json'
+  //   }
+  // }
+
+  return axios({
+    method: 'POST',
+    url: 'http://15.164.229.13/users/signin',
+    data: req
+    // config
+  });
 }
 
 function* logingUser(action) {
   try {
-    const result = yield call(loginUserAPI, action.payload);
+    const res = yield call(loginUserAPI, action.payload);
+    console.log(res);
     yield put({
       type: LOGIN_REQUEST_SUCCESS,
-      payload: result.data
+      payload: res.data.result
     });
   } catch(err) {
     yield put({
@@ -88,7 +94,7 @@ export function* loginUserSaga() {
 
 // 리듀서
 const initialState = {
-  token: localStorage.getItem('token'),
+  // token: localStorage.getItem('token'),
   isAuthenticated: false,
   user_idx: null,
   user_id: null,
@@ -105,17 +111,16 @@ export default function authReducer(state = initialState, action) {
         ...state
       }
     case LOGIN_REQUEST_SUCCESS:
-      localStorage.getItem('token', action.payload.token);
+      // localStorage.getItem('token', action.payload.token);
       return {
         ...state,
         user_idx: action.payload.user_idx,
         user_id: action.payload.user_id,
-        user_pwd: action.payload.user_pwd,
         user_name: action.payload.user_name,
         isAuthenticated: true
       }
     case REGISTER_REQUEST_SUCCESS:
-      localStorage.getItem('token', action.payload.token);
+      // localStorage.getItem('token', action.payload.token);
       return {
         ...state,
         user_id: action.payload.user_id,
@@ -125,16 +130,16 @@ export default function authReducer(state = initialState, action) {
       }
     case REGISTER_REQUEST_ERORR:
     case LOGIN_REQUEST_ERORR:
-      localStorage.removeItem('token');
+      // localStorage.removeItem('token');
       return {
         ...state,
-        // ...action.payload,
         token: null,
         isAuthenticated: false,
         user_idx: null,
         user_id: null,
         user_pwd: null,
-        user_name: null
+        user_name: null,
+        errorMsg: action.payload
       }
     default:
       return state;

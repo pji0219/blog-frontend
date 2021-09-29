@@ -4,10 +4,10 @@ import styles from './Login.module.css';
 
 function Login({ submit }) {
   const [user, setUser] = useState({
-    email: '',
-    password: ''
+    user_id: '',
+    user_pwd: ''
   });
-  const {email, password} = user;
+  const {user_id, user_pwd} = user;
 
   const onChange = event => {
     const name = event.target.name;
@@ -23,8 +23,8 @@ function Login({ submit }) {
     event.preventDefault();
     submit(user);
     setUser({
-      email: '',
-      password: ''
+      user_id: '',
+      user_pwd: ''
     });
   }
 
@@ -36,8 +36,8 @@ function Login({ submit }) {
           <span>로그인</span>
         </div>
         <div className={styles.input_container}>
-          <input type="email" name="email" value={email || ''} placeholder="아이디(이메일)" onChange={onChange} />
-          <input type="password" name="password" value={password || ''} placeholder="비밀번호" onChange={onChange} />
+          <input type="email" name="user_id" value={user_id || ''} placeholder="아이디(이메일)" onChange={onChange} />
+          <input type="password" name="user_pwd" value={user_pwd || ''} placeholder="비밀번호" onChange={onChange} />
         </div>
         <div className={styles.btn_container}>
           <button type="submit">로그인</button>

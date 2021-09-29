@@ -11,7 +11,7 @@ function PostListContainer() {
   const [err, setErr] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const postPerPage = 12;
-  // process.env.REACT_APP_SERVER_URL
+  
   // 컴포넌트 마운트시 처음 페이지 12개 포스트 불러옴
   // 그리고 전체 포스트 값을 구하기 위해 전체 포스트도 호출
   useEffect(() => {
