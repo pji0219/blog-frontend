@@ -1,10 +1,11 @@
-import React from 'react';
-// import { login } from '../redux-module/auth';
-// import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { login } from '../redux-module/auth';
+import { useDispatch } from 'react-redux';
 import Login from '../components/login/Login';
 import axios from 'axios';
 
 function LoginContainer() {
+  const dispatch = useDispatch();
 
   const submit = user => {
     axios({
@@ -13,16 +14,13 @@ function LoginContainer() {
       data: user
     })
     .then(res => {
-      console.log(res)
+      dispatch(login(res.data.result));
     })
     .catch(err => {
       console.log(err)
     })
   }
 
-  // const dispatch = useDispatch();
-  // const submit = user => dispatch(login(user));
- 
   return (
     <>
       <Login submit={submit} />

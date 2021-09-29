@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
@@ -8,22 +8,11 @@ import styles from './PostWrite.module.css';
 
 function PostWrite({ submit, userName, userIdx }) {
   const [form, setForm] = useState({
-   post_write: '',
-   category_idx: 0,
-   user_idx: 0,
+   category_idx: null,
    post_title: '',
    content: ''
   });
-  const {post_write, category_idx, content, post_title, user_idx} = form;
-
-  // 로그인 인증 된 사용자를 넣어줌
-  useEffect(() => {
-    setForm({
-      ...form,
-      post_write: userName,
-      user_idx: userIdx
-    });
-  }, [userName, userIdx, form]);
+  const {category_idx, content, post_title} = form;
   
   const onChange = event => {
     const name = event.target.name;
@@ -91,14 +80,13 @@ function PostWrite({ submit, userName, userIdx }) {
 
   const onSubmit = async event => {
     await event.preventDefault();
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     const body = {
-      post_write,
+      post_write: userName,
+      user_idx: userIdx,
       category_idx,
       post_title,
       content,
-      user_idx,
-      token
     }
     submit(body);
   }

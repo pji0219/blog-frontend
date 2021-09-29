@@ -6,10 +6,13 @@ import classNames from 'classnames';
 import { AiOutlineClose } from 'react-icons/ai';
 import { FaBars } from "react-icons/fa"
 
-function Navbar({ auth }) {
+function Navbar({ auth, userLogout }) {
   const [sidebar, setSidebar] = useState(false);
-
   const showSidebar = () => setSidebar(!sidebar);
+
+  const handleLogout = () => {
+    userLogout()
+  }
 
   return (
     <>
@@ -29,7 +32,10 @@ function Navbar({ auth }) {
         }
         {auth ? 
           (
-            <button className={styles.logout_btn}>
+            <button 
+              className={styles.logout_btn}
+              onClick={handleLogout}
+            >
               로그아웃
             </button>
           ) 

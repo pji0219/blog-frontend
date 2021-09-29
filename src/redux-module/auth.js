@@ -5,12 +5,17 @@ import axios from 'axios';
 // 회원가입
 const REGISTER_REQUEST = 'REGISTER_REQUEST';
 const REGISTER_REQUEST_SUCCESS = 'REGISTER_REQUEST_SUCCESS';
-const REGISTER_REQUEST_ERORR = 'REGISTER_REQUEST_ERROR';
+const REGISTER_REQUEST_ERROR = 'REGISTER_REQUEST_ERROR';
 
 // 로그인
 const LOGIN_REQUEST = 'LOGIN_REQUEST';
 const LOGIN_REQUEST_SUCCESS = 'LOGIN_REQUEST_SUCCESS';
-const LOGIN_REQUEST_ERORR = 'LOGIN_REQUEST_ERORR';
+const LOGIN_REQUEST_ERROR = 'LOGIN_REQUEST_ERROR';
+
+// 로그아웃
+const LOGOUT_REQUEST ='LOGOUT_REQUEST';
+const LOGOUT_REQUEST_SUCCESS ='LOGOUT_REQUEST_SUCCESS';
+const LOGOUT_REQUEST_ERROR ='LOGOUT_REQUEST_ERROR';
 
 // 액션 생성함수
 // 회원가입
@@ -23,6 +28,11 @@ export const register = user => ({
 export const login = user => ({
   type: LOGIN_REQUEST,
   payload: user
+});
+
+// 로그아웃
+export const logout = () => ({
+  type: LOGOUT_REQUEST
 });
 
 // 사가
@@ -46,55 +56,49 @@ function* registerUser(action) {
     });
   } catch(err) {
     yield put({
-      type: REGISTER_REQUEST_ERORR,
+      type: REGISTER_REQUEST_ERROR,
       payload: err.response
     })
   }
 }
 
-export function* registerUserSaga() {
-  yield takeEvery(REGISTER_REQUEST, registerUser);
-}
-
 // 로그인
-const loginUserAPI = req => {
-  // const config = {
-  //   Headers: {
-  //     'content-Type': 'application/json'
-  //   }
-  // }
-
-  return axios({
-    method: 'POST',
-    url: 'http://15.164.229.13/users/signin',
-    data: req
-    // config
-  });
-}
-
 function* logingUser(action) {
   try {
-    const res = yield call(loginUserAPI, action.payload);
-    console.log(res);
     yield put({
       type: LOGIN_REQUEST_SUCCESS,
-      payload: res.data.result
+      payload: action.payload
     });
   } catch(err) {
     yield put({
-      type: LOGIN_REQUEST_ERORR,
+      type: LOGIN_REQUEST_ERROR,
       payload: err.response
     });
   }
 }
 
-export function* loginUserSaga() {
+// 로그아웃
+function* logoutUser() {
+  try {
+    yield put({
+      type: LOGOUT_REQUEST_SUCCESS
+    });
+  } catch(err) {
+   yield put({
+    type: LOGOUT_REQUEST_ERROR,
+    payload: err.response
+   });
+  }
+}
+
+export function* authSaga() {
+  yield takeEvery(REGISTER_REQUEST, registerUser);
   yield takeEvery(LOGIN_REQUEST, logingUser);
+  yield takeEvery(LOGOUT_REQUEST, logoutUser)
 }
 
 // 리듀서
 const initialState = {
-  // token: localStorage.getItem('token'),
   isAuthenticated: false,
   user_idx: null,
   user_id: null,
@@ -111,7 +115,6 @@ export default function authReducer(state = initialState, action) {
         ...state
       }
     case LOGIN_REQUEST_SUCCESS:
-      // localStorage.getItem('token', action.payload.token);
       return {
         ...state,
         user_idx: action.payload.user_idx,
@@ -120,7 +123,6 @@ export default function authReducer(state = initialState, action) {
         isAuthenticated: true
       }
     case REGISTER_REQUEST_SUCCESS:
-      // localStorage.getItem('token', action.payload.token);
       return {
         ...state,
         user_id: action.payload.user_id,
@@ -128,18 +130,34 @@ export default function authReducer(state = initialState, action) {
         user_name: action.payload.user_name,
         isAuthenticated: false
       }
-    case REGISTER_REQUEST_ERORR:
-    case LOGIN_REQUEST_ERORR:
-      // localStorage.removeItem('token');
+    case REGISTER_REQUEST_ERROR:
       return {
         ...state,
-        token: null,
         isAuthenticated: false,
         user_idx: null,
         user_id: null,
         user_pwd: null,
         user_name: null,
         errorMsg: action.payload
+      }
+    case LOGIN_REQUEST_ERROR:
+      return {
+        ...state,
+        isAuthenticated: false,
+        user_idx: null,
+        user_id: null,
+        user_pwd: null,
+        user_name: null,
+        errorMsg: action.payload
+      }
+    case LOGOUT_REQUEST_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: false,
+        user_idx: null,
+        user_id: null,
+        user_pwd: null,
+        user_name: null,
       }
     default:
       return state;

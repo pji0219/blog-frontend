@@ -6,7 +6,6 @@ import PostWrite from '../components/post-write/PostWrite';
 function PostWriteContainer() {
   const { isAuthenticated, user_idx, user_name } = useSelector(state => state.auth);
   const dispatch = useDispatch();
-
   const submit = body => dispatch(uploadPost(body));
 
   if (!isAuthenticated) return <div>로그인이 필요 합니다.</div>
