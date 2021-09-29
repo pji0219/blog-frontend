@@ -13,10 +13,6 @@ export const POST_UPLOADING_REQUEST = "POST_UPLOADING_REQUEST";
 export const POST_UPLOADING_SUCCESS = "POST_UPLOADING_SUCCESS";
 export const POST_UPLOADING_ERROR = "POST_UPLOADING_ERROR";
 
-// 액션 생성 함수
-// 모든 포스트 호출
-// export const getPosts = () => ({ type: GET_POSTS_REQUEST });
-
 // 포스트 업로드
 export const uploadPost = body => (
   {
@@ -24,29 +20,6 @@ export const uploadPost = body => (
     payload: body
   }
 )
-
-// 사가
-// 모든 포스트 호출
-// const PostsAPI = async () => {
-//   const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/article`);
-//   return res;
-// }
-
-// function* getPostsSaga() {
-//   try {
-//     const posts = yield call(PostsAPI);
-//     yield put({
-//       type: GET_POSTS_SUCCESS,
-//       payload: posts.data.results
-//     });
-//   } catch (err) {
-//     yield put({
-//       type: GET_POSTS_ERROR,
-//       payload: err,
-//       error: true
-//     });
-//   }
-// }
 
 // 포스트 업로드
 const uploadPostAPI = payload => {
@@ -82,41 +55,5 @@ function* uploadPostSaga(action) {
 }
 
 export function* postsSaga() {
-  // yield takeEvery(GET_POSTS_REQUEST, getPostsSaga);
   yield takeEvery(POST_UPLOADING_REQUEST, uploadPostSaga);
 }
-
-// 리듀서
-// const initialState = {
-//   loading: false,
-//   data: [],
-//   error: null
-// };
-
-// export default function posts(state = initialState, action) {
-//   switch (action.type) {
-//     case GET_POSTS_REQUEST:
-//       return {
-//         ...state,
-//         loading: true,
-//         data: null,
-//         error: null
-//       };
-//     case GET_POSTS_SUCCESS:
-//       return {
-//         ...state,
-//         loading: false,
-//         data: action.payload,
-//         error: null
-//       };
-//     case GET_POSTS_ERROR:
-//       return {
-//         ...state,
-//         loading: false,
-//         data: null,
-//         error: action.error
-//       };
-//     default:
-//       return state;
-//   }
-// }

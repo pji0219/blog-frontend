@@ -38,13 +38,8 @@ export const logout = () => ({
 // 사가
 // 회원가입
 const registerUserAPI = (req) => {
-  const config = {
-    Headers: {
-      'content-Type': 'application/json'
-    }
-  }
   
-  return axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signUp`, req, config);
+  return axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signUp`, req);
 }
 
 function* registerUser(action) {
@@ -125,9 +120,6 @@ export default function authReducer(state = initialState, action) {
     case REGISTER_REQUEST_SUCCESS:
       return {
         ...state,
-        user_id: action.payload.user_id,
-        user_pwd: action.payload.user_pwd,
-        user_name: action.payload.user_name,
         isAuthenticated: false
       }
     case REGISTER_REQUEST_ERROR:

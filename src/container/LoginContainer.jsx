@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { login } from '../redux-module/auth';
 import { useDispatch } from 'react-redux';
 import Login from '../components/login/Login';
@@ -10,7 +10,7 @@ function LoginContainer() {
   const submit = user => {
     axios({
       method: 'POST',
-      url: 'http://15.164.229.13/users/signin',
+      url: `${process.env.REACT_APP_SERVER_URL}/users/signin`,
       data: user
     })
     .then(res => {
