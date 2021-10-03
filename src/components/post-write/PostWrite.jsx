@@ -8,7 +8,7 @@ import styles from './PostWrite.module.css';
 
 function PostWrite({ submit, userName, userIdx }) {
   const [form, setForm] = useState({
-   category_idx: null,
+   category_idx: 1,
    post_title: '',
    content: ''
   });
@@ -80,7 +80,6 @@ function PostWrite({ submit, userName, userIdx }) {
 
   const onSubmit = async event => {
     await event.preventDefault();
-    // const token = localStorage.getItem('token');
     const body = {
       post_write: userName,
       user_idx: userIdx,
@@ -89,6 +88,12 @@ function PostWrite({ submit, userName, userIdx }) {
       content,
     }
     submit(body);
+
+    setForm({
+      category_idx: '',
+      post_title: '',
+      content: ''
+    });
   }
 
   return (
@@ -103,14 +108,15 @@ function PostWrite({ submit, userName, userIdx }) {
             onChange={onChange}
             placeholder="제목을 입력 하세요." 
           />
-          <label htmlFor="category">카테고리</label>
-          <input 
-            type="text" 
-            name="category_idx"
-            value={category_idx || ''}
-            onChange={onChange} 
-            placeholder="카테고리를 입력하세요." 
-          />
+          <label htmlFor="category" className={styles.category_label}>카테고리를 선택하세요:
+            <select name="category_idx" value={category_idx || 1} onChange={onchange}>
+              <option value="1">Home</option>
+              <option value="2">About</option>
+              <option value="3">HTML</option>
+              <option value="4">CSS</option>
+              <option value="5">JavaScript</option>
+            </select>
+          </label>
         </div>
         <CKEditor 
           editor={ClassicEditor}

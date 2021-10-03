@@ -4,12 +4,11 @@ import styles from './Register.module.css';
 
 function Register({ submit }) {
   const [user, setUser] = useState({
-    email: '',
-    password: '',
-    repassword: '',
-    nickname: ''
+    user_id: '',
+    user_pwd: '',
+    user_name: ''
   });
-  const {email, password, repassword, nickname} = user;
+  const {user_id, user_pwd, user_name} = user;
   
   const onChange = event => {
     const name = event.target.name;
@@ -25,10 +24,9 @@ function Register({ submit }) {
     event.preventDefault();
     submit(user);
     setUser({
-      email: '',
-      password: '',
-      repassword: '',
-      nickname: ''
+      user_id: '',
+      user_pwd: '',
+      user_name: ''
     });
   }
   
@@ -39,10 +37,9 @@ function Register({ submit }) {
           <span>계정 만들기</span>
         </div>
         <div className={styles.input_container}>
-          <input type="email" value={email || ''} name="email" placeholder="아이디(이메일)" onChange={onChange} />
-          <input type="password" value={password || ''} name="password" placeholder="비밀번호" onChange={onChange} />
-          <input type="password" value={repassword || ''} name="repassword" placeholder="비밀번호 확인" onChange={onChange} />
-          <input type="text" value={nickname || ''} name="nickname" placeholder="닉네임" onChange={onChange} />
+          <input type="email" value={user_id || ''} name="user_id" placeholder="아이디(이메일)" onChange={onChange} />
+          <input type="password" value={user_pwd || ''} name="user_pwd" placeholder="비밀번호" onChange={onChange} />
+          <input type="text" value={user_name || ''} name="user_name" placeholder="닉네임" onChange={onChange} />
         </div>
         <div className={styles.btn_container}>
           <button type="submit">등록</button>

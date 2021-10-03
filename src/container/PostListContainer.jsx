@@ -3,7 +3,7 @@ import PostList from '../components/post-list/PostList';
 import Loading from '../components/loading-spinner/Loading';
 import Pagination from '../components/pagination/Pagination';
 import axios from 'axios';
-// ${process.env.REACT_APP_SERVER_URL}
+
 function PostListContainer() {
   const [totalData, setTotaldata] = useState([]);
   const [data, setData] = useState([]);

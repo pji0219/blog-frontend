@@ -19,6 +19,16 @@
   font-size: 32px;
 }
 
+.category_label {
+  font-size: 1rem;
+}
+
+.category_label select {
+  height: 50px;
+  text-align: center;
+  font-size: 18px;
+}
+
 .btn_container {
   margin-top: 20px;
   margin-right: 50px;

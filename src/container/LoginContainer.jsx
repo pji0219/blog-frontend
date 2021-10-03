@@ -18,7 +18,7 @@ function LoginContainer() {
     })
     .catch(err => {
       console.log(err)
-    })
+    });
   }
 
   return (

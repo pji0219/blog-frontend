@@ -8,8 +8,15 @@ import rootReducer, { rootSaga } from './redux-module';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { createBrowserHistory } from 'history';
+import { Router } from 'react-router-dom';
 
-const sagaMiddleware = createSagaMiddleware();
+const customHistory = createBrowserHistory();
+const sagaMiddleware = createSagaMiddleware({
+  context: {
+    history: customHistory 
+  }
+});
 
 const store = createStore(
   rootReducer, 
@@ -20,9 +27,11 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <Router history={customHistory}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

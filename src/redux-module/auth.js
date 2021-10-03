@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, getContext } from 'redux-saga/effects';
 import axios from 'axios';
 
 // 타입
@@ -38,7 +38,6 @@ export const logout = () => ({
 // 사가
 // 회원가입
 const registerUserAPI = (req) => {
-  
   return axios.post(`${process.env.REACT_APP_SERVER_URL}/users/signUp`, req);
 }
 
@@ -60,10 +59,15 @@ function* registerUser(action) {
 // 로그인
 function* logingUser(action) {
   try {
+    const history = yield getContext('history');
+
     yield put({
       type: LOGIN_REQUEST_SUCCESS,
       payload: action.payload
     });
+
+    history.push('/');
+    
   } catch(err) {
     yield put({
       type: LOGIN_REQUEST_ERROR,
@@ -75,9 +79,13 @@ function* logingUser(action) {
 // 로그아웃
 function* logoutUser() {
   try {
+    const history = yield getContext('history')
+
     yield put({
       type: LOGOUT_REQUEST_SUCCESS
     });
+    
+    history.push('/');
   } catch(err) {
    yield put({
     type: LOGOUT_REQUEST_ERROR,
@@ -95,10 +103,10 @@ export function* authSaga() {
 // 리듀서
 const initialState = {
   isAuthenticated: false,
-  user_idx: null,
-  user_id: null,
-  user_pwd: null,
-  user_name: null,
+  userIdx: null,
+  userId: null,
+  userPwd: null,
+  userName: null,
   errorMsg: ''
 }
 
@@ -112,9 +120,9 @@ export default function authReducer(state = initialState, action) {
     case LOGIN_REQUEST_SUCCESS:
       return {
         ...state,
-        user_idx: action.payload.user_idx,
-        user_id: action.payload.user_id,
-        user_name: action.payload.user_name,
+        userIdx: action.payload.user_idx,
+        userId: action.payload.user_id,
+        userName: action.payload.user_name,
         isAuthenticated: true
       }
     case REGISTER_REQUEST_SUCCESS:
@@ -126,30 +134,30 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: false,
-        user_idx: null,
-        user_id: null,
-        user_pwd: null,
-        user_name: null,
+        userIdx: null,
+        userId: null,
+        userPwd: null,
+        userName: null,
         errorMsg: action.payload
       }
     case LOGIN_REQUEST_ERROR:
       return {
         ...state,
         isAuthenticated: false,
-        user_idx: null,
-        user_id: null,
-        user_pwd: null,
-        user_name: null,
+        userIdx: null,
+        userId: null,
+        userPwd: null,
+        userName: null,
         errorMsg: action.payload
       }
     case LOGOUT_REQUEST_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
-        user_idx: null,
-        user_id: null,
-        user_pwd: null,
-        user_name: null,
+        userIdx: null,
+        userId: null,
+        userPwd: null,
+        userName: null,
       }
     default:
       return state;

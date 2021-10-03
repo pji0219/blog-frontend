@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
 import { all } from 'redux-saga/effects';
-import { postsSaga } from "./post";
+import postReducer, { postsSaga } from "./post";
 import authReducer, { authSaga } from "./auth";
 
 const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  post: postReducer
 });
 
 export function* rootSaga() {

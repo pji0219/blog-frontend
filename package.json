@@ -37,6 +37,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.4",
     "classnames": "^2.3.1",
+    "history": "4.10.1",
     "raw-loader": "3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
