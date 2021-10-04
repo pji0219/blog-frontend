@@ -86,7 +86,7 @@ function PostDetail({ postDetail, userName, loading }) {
       <div className={styles.info_container}>
         <FaPenAlt />
         &nbsp;
-        <span>
+        <span className={styles.date}>
           {postDetail.map(post => (
             post.post_Date
           ))}
@@ -94,7 +94,7 @@ function PostDetail({ postDetail, userName, loading }) {
         &nbsp;&nbsp;
         <FaCommentDots />
         &nbsp;
-        <span>
+        <span className={styles.comment}>
           {
             postDetail.map(post => (
               post.Comment.length

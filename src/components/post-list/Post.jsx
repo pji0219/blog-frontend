@@ -2,6 +2,7 @@ import React from 'react';
 import js from './js.png';
 import styles from './Post.module.css';
 import { Link } from 'react-router-dom';
+import { FaMouse, FaThumbsUp } from "react-icons/fa";
 
 function post({ title, contents, date, user, star, views, url }) {
 
@@ -15,11 +16,16 @@ function post({ title, contents, date, user, star, views, url }) {
           <span>{date}</span>
         </div>
         <div className={styles.post_views_container}>
-          <span>조회수 {views}</span>
+          <FaMouse />
+          &nbsp;
+          <span>{views}</span>
         </div>
         <div className={styles.post_info_container}>
           <span className={styles.user}>{user}</span>
-          <span className={styles.comments}>추천수 {star}</span>
+          &nbsp;&nbsp;
+          <FaThumbsUp />
+          &nbsp;
+          <span className={styles.star}>{star}</span>
         </div>
       </li>
     </Link>
