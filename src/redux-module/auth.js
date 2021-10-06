@@ -59,12 +59,12 @@ function* registerUser(action) {
 // 로그인
 function* logingUser(action) {
   try {
-    const history = yield getContext('history');
-
     yield put({
       type: LOGIN_REQUEST_SUCCESS,
       payload: action.payload
     });
+
+    const history = yield getContext('history');
 
     history.push('/');
     
@@ -73,6 +73,8 @@ function* logingUser(action) {
       type: LOGIN_REQUEST_ERROR,
       payload: err.response
     });
+
+    yield put(alert('error! 로그인에 실패하였습니다.'));
   }
 }
 

@@ -4,11 +4,9 @@ import Loading from '../loading-spinner/Loading';
 import styles from './PostDetail.module.css';
 import { FaMouse, FaCommentDots, FaPenAlt } from "react-icons/fa";
 
-function PostDetail({ postDetail, userName, loading }) {
-
+function PostDetail({ postDetail, userName, loading, postId, postDelete }) {
   const onDelete = () => {
-    // postDelete();
-    return;
+    postDelete();
   }
 
   // JSX
@@ -20,7 +18,7 @@ function PostDetail({ postDetail, userName, loading }) {
         </button>
       </Link>
     
-      <Link to="#">
+      <Link to={`/postedit/${postId}/edit`}>
         <button className={styles.edit_btn}>
           수정
         </button>
@@ -43,7 +41,7 @@ function PostDetail({ postDetail, userName, loading }) {
   )
   
   /* 
-    데이터에 있는 작성자를 가져오기 위함 
+    데이터에 있는 콘텐츠를 가져오기 위함 
     ( postDetail[0].content으로 정상적으로 했는데도 오류가 나서 ㅠㅠ )
     ( JSX에 있는 map함수를 이용해서 데이터 값을 받아오는 것들도 마찬가지 이유로 사용 )
   */

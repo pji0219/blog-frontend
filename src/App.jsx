@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage';
 import NavbarContainer from './container/NavbarContainer';
 import PostWritePage from './pages/PostWritePage';
 import PostDetailPage from './pages/PostDetailPage';
+import PostEditPage from './pages/PostEditPage';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
         <Route path="/register" component={registerPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/write" component={PostWritePage} />
-        <Route path="/post/:id" component={PostDetailPage} />
+        <Route path="/post/:id" exact component={PostDetailPage} />
+        <Route path="/postedit/:id/edit" component={PostEditPage} />
       </Switch>
     </>
   );

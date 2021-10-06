@@ -13,6 +13,8 @@ function PostDetailContainer({postId}) {
     dispatch(getPostDetail(postId));
   }, [postId, dispatch]);
 
+  const postDelete = () => dispatch();
+
   if (error) return <div>에러 발생!</div>;
 
   return (
@@ -21,6 +23,8 @@ function PostDetailContainer({postId}) {
         postDetail={postDetail}
         loading={loading}
         userName={userName}
+        postId={postId}
+        postDelete={postDelete}
       />
     </>
   );

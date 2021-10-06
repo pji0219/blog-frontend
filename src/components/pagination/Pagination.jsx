@@ -14,11 +14,11 @@ function Pagination({ postsPerPage, totalPosts, paginate, currentPage }) {
   // 이전 또는 다음 페이지로 넘어갈 때 +-5를 하기 위한 state
   const [pageNumberLimit] = useState(5);
   /*
-    한번에 최대 몇 페이지까지 표시 될지 정함 (5페이지)
+    한번에 최대 몇 페이지까지 표시 될지 정함 (10페이지)
     그리고 다른 기능으로는 이전, 다음 페이지로 넘어갈때 나열될 
     페이지 숫자들을 바꾸기 위한 state
   */
-  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(10);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
   // 이전, 다음 페이지 버튼 기능 구현

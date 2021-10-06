@@ -87,13 +87,8 @@ function PostWrite({ submit, userName, userIdx }) {
       post_title,
       content,
     }
+    console.log(body, '바디');
     submit(body);
-
-    setForm({
-      category_idx: '',
-      post_title: '',
-      content: ''
-    });
   }
 
   return (
@@ -109,7 +104,7 @@ function PostWrite({ submit, userName, userIdx }) {
             placeholder="제목을 입력 하세요." 
           />
           <label htmlFor="category" className={styles.category_label}>카테고리를 선택하세요:
-            <select name="category_idx" value={category_idx || 1} onChange={onchange}>
+            <select name="category_idx" onChange={onchange}>
               <option value="1">Home</option>
               <option value="2">About</option>
               <option value="3">HTML</option>
