@@ -4,14 +4,13 @@ import styles from './Post.module.css';
 import { Link } from 'react-router-dom';
 import { FaMouse, FaThumbsUp } from "react-icons/fa";
 
-function post({ title, contents, date, user, star, views, url }) {
+function post({ title, date, user, star, views, url }) {
 
   return (
     <Link to={`/post/${url}`}>
       <li className={styles.post_container}>
         <img className={styles.post_img} src={js} alt="img" />
         <h3 className={styles.post_title}>{title}</h3>
-        <p className={styles.post_body}>{contents}</p>
         <div className={styles.post_date_container}>
           <span>{date}</span>
         </div>

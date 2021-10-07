@@ -25,19 +25,6 @@
   font-size: 20px;
 }
 
-.post_body {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  word-wrap:break-word;
-  margin-left: 16px;
-  margin-bottom: 16px;
-  color: #757575;
-  font-size: 16px;
-}
-
 .post_date_container {
   display: flex;
   justify-content: flex-end;

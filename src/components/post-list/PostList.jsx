@@ -11,7 +11,6 @@ function PostList({ posts }) {
           url={post.articles_idx}
           img={post.Img}
           title={post.post_title}
-          contents={post.content}
           date={post.post_Date}
           user={post.post_write}
           star={post.star}

@@ -1,9 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import CKEditor from '@ckeditor/ckeditor5-react';
-// import BallonEditor from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor';
-// import { editorConfiguration } from '../../editor/EditorConfig';
-// import Myinit from '../../editor/UploadAdapter';
 import Loading from '../loading-spinner/Loading';
 import styles from './PostDetail.module.css';
 import { FaMouse, FaCommentDots, FaPenAlt } from "react-icons/fa";
@@ -52,7 +48,6 @@ function PostDetail({ postDetail, userName, loading, postId, postDelete }) {
   const content = postDetail.map(post => (
     post.content
   ));
-  // const [contentData] = content;
   
   /* 
     데이터에 있는 작성자를 가져오기 위함 
@@ -112,13 +107,6 @@ function PostDetail({ postDetail, userName, loading, postId, postDelete }) {
           ))}
         </span>
       </div>
-      {/* <div className={styles.content_container}>
-        <CKEditor 
-          editor={BallonEditor}
-          config={editorConfiguration}
-          disabled="true"
-        />
-      </div> */}
       <div className={styles.contents_container}>
         <textarea defaultValue={content[0]} readOnly />
       </div>
