@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPostDetail } from '../redux-module/post';
+import { getPostDetail, POST_DELETE_REQUEST } from '../redux-module/post';
 import PostDetail from '../components/post-detail/PostDetail';
 
 function PostDetailContainer({postId}) {
@@ -13,7 +13,12 @@ function PostDetailContainer({postId}) {
     dispatch(getPostDetail(postId));
   }, [postId, dispatch]);
 
-  const postDelete = () => dispatch();
+  const postDelete = () => {
+    dispatch({
+      type: POST_DELETE_REQUEST,
+      payload: postId
+    });
+  }
 
   if (error) return <div>에러 발생!</div>;
 

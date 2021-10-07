@@ -6,7 +6,8 @@ import axios from 'axios';
 
 function LoginContainer() {
   const dispatch = useDispatch();
-
+  
+  // 여기서 api 호출 후 응답 값을 사가로 디스패치 함
   const submit = user => {
     axios({
       method: 'POST',

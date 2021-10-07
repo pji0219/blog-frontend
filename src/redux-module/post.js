@@ -18,7 +18,7 @@ const POST_EDIT_UPLOADING_SUCCESS = "POST_EDIT_UPLOADING_SUCCESS";
 const POST_EDIT_UPLOADING_ERROR = "POST_EDIT_UPLOADING_ERROR";
 
 // 포스트 삭제
-const POST_DELETE_REQUEST = "POST_DELETE_REQUEST";
+export const POST_DELETE_REQUEST = "POST_DELETE_REQUEST";
 const POST_DELETE_SUCCESS = "POST_DELETE_SUCCESS";
 const POST_DELETE_ERROR = "POST_DELETE_ERROR ";
 
@@ -40,7 +40,7 @@ export const getPostDetail = id => (
 )
 
 // 포스트 삭제
-export const postDelete = id => (
+export const getPostDelete = id => (
   {
     type: POST_DELETE_REQUEST,
     payload: id
@@ -112,22 +112,16 @@ function* postDetailSaga(action) {
 }
 
 // 포스트 수정 업로드
-const postEditAPI = payload => {
-  console.log(payload.article_idx, '수정 id');
-  return axios.put(`${process.env.REACT_APP_SERVER_URL}/article/detail?articles_idx=${payload.article_idx}`, payload);
-}
-
+//에디트 컨테이너에서 axios로 api요청을 하고 결과 값을 디스패치 해서 사가로 전달하게 만듦
 function* postEditSaga(action) {
   try {
-    const res = yield call(postEditAPI, action.payload);
-    console.log(res, '포스트 수정 사가');
     yield put({
       type: POST_EDIT_UPLOADING_SUCCESS,
-      payload: res.data.results
+      payload: action.payload
     });
 
     const history = yield getContext('history');
-    yield put(history.push(`/post/${action.payload.article_idx}`));
+    yield put(history.push('/'));
 
   } catch(err) {
     
@@ -135,35 +129,72 @@ function* postEditSaga(action) {
       type: POST_EDIT_UPLOADING_ERROR,
       payload: err
     });
-
-    yield put(alert('error! 포스트 수정에 실패 하였습니다.'));
   }
 }
 
 // 포스트 삭제
 const postDeleteAPI = id => {
   console.log(id, '포스트 삭제');
-  return axios.delete(`${process.env.REACT_APP_SERVER_URL}/article?article_idx=${id}`);
+  return axios.delete(`${process.env.REACT_APP_SERVER_URL}/article?articles_idx=${id}`);
 }
 
+function* postDeleteSaga(action) {
+  try {
+    const res = yield call(postDeleteAPI, action.payload);
+    console.log(res, '삭제 사가');
 
+    yield put({
+      type: POST_DELETE_SUCCESS,
+      payload: res.data.result
+    });
+
+    const history = yield getContext('history');
+    history.push('/');
+  } catch(err) {
+
+    yield put({
+      type: POST_DELETE_ERROR,
+      payload: err
+    });
+
+    const history = yield getContext('history');
+    history.push('/');
+  }
+
+}
 
 export function* postsSaga() {
   yield takeEvery(POST_UPLOADING_REQUEST, uploadPostSaga);
   yield takeEvery(POST_DETAIL_LOADING_REQUEST, postDetailSaga);
   yield takeEvery(POST_EDIT_UPLOADING_REQUEST, postEditSaga);
+  yield takeEvery(POST_DELETE_REQUEST, postDeleteSaga);
 }
 
 // 리듀서
 const initialState = {
   postDetail: [],
-  editedPost: [],
   loading: false,
   error: null
 }
 
 export default function postReducer(state = initialState, action) {
   switch(action.type) {
+    case POST_UPLOADING_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case POST_UPLOADING_SUCCESS: 
+      return {
+        ...state,
+        loading: false
+      }
+    case POST_UPLOADING_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
+      }
     case POST_DETAIL_LOADING_REQUEST:
     return {
       ...state,
@@ -190,7 +221,6 @@ export default function postReducer(state = initialState, action) {
       case POST_EDIT_UPLOADING_SUCCESS: 
         return {
           ...state,
-          editedPost: action.payload,
           loading: false
         }
       case POST_EDIT_UPLOADING_ERROR:

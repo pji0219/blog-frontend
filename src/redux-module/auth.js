@@ -57,6 +57,7 @@ function* registerUser(action) {
 }
 
 // 로그인
+// 로그인 컨테이너에서 api 요청후 데이터를 응답 받아서 디스패치해서 사가로 전달
 function* logingUser(action) {
   try {
     yield put({

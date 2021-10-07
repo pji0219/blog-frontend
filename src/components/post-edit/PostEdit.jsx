@@ -6,16 +6,15 @@ import { editorConfiguration } from '../../editor/EditorConfig';
 import Myinit from '../../editor/UploadAdapter';
 import styles from './PostEdit.module.css';
 
-function PostEdit({ submit, postDetail, postId}) {
+function PostEdit({ submit, postDetail}) {
   const [form, setForm] = useState({
     content: '',
     category_idx: null,
-    post_title: '',
-    article_idx: null
+    post_title: ''
   });
-  const {content, category_idx, post_title, article_idx} = form;
+  const {content, category_idx, post_title } = form;
   /* 
-    데이터에 있는 작성자를 가져오기 위함 
+    데이터에 있는 콘텐츠를 가져오기 위함 
     ( postDetail.content 또는 postDetail[0].content로 정상적으로 했는데도 오류가 나서 ㅠㅠ )
   */
   const contents = postDetail.map(post => (
@@ -39,21 +38,11 @@ function PostEdit({ submit, postDetail, postId}) {
       post.post_title
     ));
   
-  /* 
-    데이터에 있는 아티클 인덱스를 가져오기 위함 
-    ( postDetail.articles_idx 또는 postDetail[0].articles_idx로 정상적으로 했는데도 오류가 나서 ㅠㅠ )
-  */
-    // const articleIdx = postDetail.map(post => (
-    //   post.article_idx
-    // ));
-  
-  
   useEffect(() => {
     setForm({
       content: contents,
       category_idx: categoryIdx,
-      post_title: title,
-      article_idx: postId
+      post_title: title
     });
   }, []);
    
@@ -126,8 +115,7 @@ function PostEdit({ submit, postDetail, postId}) {
     const body = {
       content,
       category_idx,
-      post_title,
-      article_idx
+      post_title
     }
     submit(body);
   }

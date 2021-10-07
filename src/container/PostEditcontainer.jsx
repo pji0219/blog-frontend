@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { editPost } from '../redux-module/post';
 import PostEdit from '../components/post-edit/PostEdit';
+import axios from 'axios';
 
 function PostEditcontainer({postId}) {
   const { isAuthenticated, userName } = useSelector(state => state.auth);
@@ -16,8 +17,16 @@ function PostEditcontainer({postId}) {
   const post = postDetail.map(post => (
     post.user_name
   ));
-
-  const submit = body => dispatch(editPost(body));
+  
+  // 여기서 api호출 후 응답 결과를 디스패치 해서 사가로 전달하도록 구현 함
+  const submit = async body => {
+    try {
+      const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/article/detail?articles_idx=${postId}`, body);
+      dispatch(editPost(res));
+    } catch(err) {
+      alert('에러가 발생하였습니다.');
+    }
+  }
 
   if (!isAuthenticated) return <div>잘못된 접근 입니다.</div>
   if (userName !== post[0]) return <div>잘못된 접근 입니다.</div>
@@ -27,7 +36,6 @@ function PostEditcontainer({postId}) {
       <PostEdit 
         postDetail={postDetail} 
         submit={submit}
-        postId={postId}
       />
     </>
   );

@@ -87,7 +87,6 @@ function PostWrite({ submit, userName, userIdx }) {
       post_title,
       content,
     }
-    console.log(body, '바디');
     submit(body);
   }
 
