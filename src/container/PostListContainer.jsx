@@ -29,6 +29,7 @@ function PostListContainer() {
       }))
       .catch(err => {
         console.log(err);
+        setLoading(false);
         setErr(true);
       });
   }, []);

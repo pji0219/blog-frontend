@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import CKEditor from '@ckeditor/ckeditor5-react';
 // import BallonEditor from '@ckeditor/ckeditor5-editor-balloon/src/ballooneditor';
@@ -8,9 +8,56 @@ import Loading from '../loading-spinner/Loading';
 import styles from './PostDetail.module.css';
 import { FaMouse, FaCommentDots, FaPenAlt } from "react-icons/fa";
 
-function PostDetail({ postDetail, userName, loading, postId, postDelete }) {
+function PostDetail({ 
+  postDetail, 
+  userName, 
+  loading, 
+  postId, 
+  postDelete,
+  comments,
+  uploadComment,
+  userIdx,
+  auth
+}) {
+  const [form, setForm] = useState({
+    post_comment: ''
+  });
+  const { post_comment } = form;
+
+  // useEffect(() => {
+  //   setForm({
+  //     article_idx: postId,
+  //     user_idx: userIdx
+  //   });
+  // }, [postId, userIdx])
+
   const onDelete = () => {
     postDelete();
+  }
+
+  const onChange = event => {
+    const value = event.target.value;
+    
+    setForm({
+      ...form,
+      post_comment: value
+    });
+  }
+
+  const onSubmit = async event => {
+    await event.preventDefault();
+
+    const body = {
+      post_comment,
+      article_idx: postId,
+      user_idx: userIdx
+    }
+
+    uploadComment(body);
+
+    setForm({
+      post_comment: ''
+    });
   }
 
   // JSX
@@ -98,11 +145,7 @@ function PostDetail({ postDetail, userName, loading, postId, postDelete }) {
         <FaCommentDots />
         &nbsp;
         <span className={styles.comment}>
-          {
-            postDetail.map(post => (
-              post.Comment.length
-            ))
-          }
+          {comments.length}
         </span>
         &nbsp;&nbsp;
         <FaMouse />
@@ -122,6 +165,31 @@ function PostDetail({ postDetail, userName, loading, postId, postDelete }) {
       <div className={styles.contents_container}>
         <textarea defaultValue={content[0]} readOnly />
       </div>
+      <ul className={styles.comments_container}>
+        {
+          comments.map(comment => (
+            <li key={comment.comment_idx}>
+              {comment.post_comment}
+              <hr />
+            </li>
+          ))
+        }
+      </ul>
+      <form className={styles.comment_write_container} onSubmit={onsubmit}>
+        {auth ? (
+          <>
+            <span>댓글 쓰기</span>
+            <input type="text" onChange={onChange} />
+            <button>등록</button>
+          </>
+        ) : (
+          <>
+            <span>댓글 쓰기</span>
+            <input type="text" onChange={onChange} placeholder="댓글을 쓰려면 로그인이 필요 합니다." disabled />
+            <button disabled>등록</button>
+          </>
+        )}
+      </form>
     </>
   )
   

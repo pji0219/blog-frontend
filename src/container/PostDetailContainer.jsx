@@ -3,15 +3,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getPostDetail, POST_DELETE_REQUEST } from '../redux-module/post';
 import PostDetail from '../components/post-detail/PostDetail';
 import styles from './PostDetailContainer.module.css';
+import { loadComments, uploadComments,  } from '../redux-module/comment';
+// import axios from 'axios';
 
 function PostDetailContainer({postId}) {
   const {loading, error, postDetail} = useSelector(state => state.post);
-  const {userName} = useSelector(state => state.auth);
+  const {userName, isAuthenticated, userIdx} = useSelector(state => state.auth);
+  const { comments } = useSelector(state => state.comments);
 
   const dispatch = useDispatch();
 
+  // 포스트 상세페이지와 댓글을 불러옴
   useEffect(() => {
     dispatch(getPostDetail(postId));
+    dispatch(loadComments(postId));
+    // axios.get(`${process.env.REACT_APP_SERVER_URL}/comment?articles_idx=${postId}`)
+    //   .then(res => {
+    //     dispatch(loadComments(res.data.results));
+    //     console.log(res.data.results, '코멘트!!');
+    //   });
   }, [postId, dispatch]);
 
   const postDelete = () => {
@@ -20,7 +30,9 @@ function PostDetailContainer({postId}) {
       payload: postId
     });
   }
-  // npx browserslist@latest --update-db
+
+  const uploadComment = body => dispatch(uploadComments(body));
+  
   return (
     <>
       {error ? (
@@ -38,6 +50,10 @@ function PostDetailContainer({postId}) {
           userName={userName}
           postId={postId}
           postDelete={postDelete}
+          comments={comments}
+          uploadComment={uploadComment}
+          userIdx={userIdx}
+          auth={isAuthenticated}
         />
       )}
     </>
